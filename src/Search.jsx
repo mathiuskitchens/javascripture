@@ -10,12 +10,9 @@ import {
   Button,
   Container,
   FormControl,
-  IconButton,
   InputLabel,
-  Menu,
   MenuItem,
   Select,
-  SvgIcon,
   TextField,
 } from "@mui/material";
 import { searchVerse } from "services/api-requests";
@@ -69,34 +66,6 @@ function Search() {
             }
           }}
         />
-        <FormControl
-          sx={{ minWidth: 100 }}
-          size="small"
-          style={{ marginLeft: "6px", marginTop: "18px", height: "2rem" }}
-        >
-          <InputLabel id="translation-selector-label">Choose</InputLabel>
-          <Select
-            labelId="translation-selector-label"
-            id="translation-selector"
-            value={translation}
-            label="Choose"
-            onChange={handleTranslationChange}
-          >
-            <MenuItem value={"esv"}>ESV</MenuItem>
-            <MenuItem value={"mater"}>'Mater</MenuItem>
-            <MenuItem value={"joker"}>Joker</MenuItem>
-            <MenuItem value={"yoda"}>Yoda</MenuItem>
-            <MenuItem value={"groot"}>Groot</MenuItem>
-          </Select>
-        </FormControl>
-        {/*         <Button
-          variant="contained"
-          size="medium"
-          style={{ marginTop: "20px", height: "2rem" }}
-          onClick={handleGpt}
-        >
-          'Mater
-        </Button> */}
         <Button
           onClick={() => {
             setResultVerse("");

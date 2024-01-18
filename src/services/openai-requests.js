@@ -17,7 +17,7 @@ export async function gptRequest(input, translation) {
         content: `${input}`,
       },
     ],
-    temperature: 1.6,
+    temperature: 1.2,
     model: "gpt-3.5-turbo",
   });
 
