@@ -10,12 +10,9 @@ import {
   Button,
   Container,
   FormControl,
-  IconButton,
   InputLabel,
-  Menu,
   MenuItem,
   Select,
-  SvgIcon,
   TextField,
 } from "@mui/material";
 import { searchVerse } from "services/api-requests";
