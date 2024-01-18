@@ -10,14 +10,14 @@ export async function gptRequest(input, translation) {
     messages: [
       {
         role: "system",
-        content: `Look up the provided bible verse and make it sound like ${translation} said it. Do not return anything besides the translated verse. If I ask you to translate for Groot, only return "I am Groot." over and over. If you get a verse that doesn't exist, call the user a heathen and tell them to check again`,
+        content: `You are a large language model using OpenAI GPT 3.5. Please look up the provided bible verse and try to make the wording sound like ${translation}. If you get a verse that doesn't exist, call the user a heathen and tell them to check again`,
       },
       {
         role: "user",
         content: `${input}`,
       },
     ],
-    temperature: 1.6,
+    temperature: 0.7,
     model: "gpt-3.5-turbo",
   });
 
