@@ -10,8 +10,8 @@ root.render(
   <React.StrictMode>
     <Layout>
       <Search />
-      </Layout>
-  </React.StrictMode>
+    </Layout>
+  </React.StrictMode>,
 );
 
 reportWebVitals();

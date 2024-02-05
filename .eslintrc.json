@@ -49,8 +49,14 @@
     },
     "rules": {
         "linebreak-style": [
-            "error",
+            "warn",
             "unix"
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
         ],
         "quotes": [
             "error"
