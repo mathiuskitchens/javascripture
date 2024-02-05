@@ -26,9 +26,12 @@ export default function FixedBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Search" icon={<Search />} />
-          <BottomNavigationAction label="Read" icon={<AutoStoriesOutlined />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Translate" icon={<Search />} />
+          <BottomNavigationAction
+            label="Bible"
+            icon={<AutoStoriesOutlined />}
+          />
+          <BottomNavigationAction label="Top Hits" icon={<FavoriteIcon />} />
         </BottomNavigation>
       </Paper>
     </Box>

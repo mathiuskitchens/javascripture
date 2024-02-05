@@ -1,36 +1,43 @@
 /* eslint-disable no-console */
-import "./App.css";
-import Layout from "Layout";
+import "../App.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import {
-  Box,
+  Card,
   Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
+  Skeleton,
+  Stack,
   TextField,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { searchVerse } from "services/api-requests";
-import { useState } from "react";
+import React, { useState } from "react";
 import { gptRequest } from "services/openai-requests";
+import VerseCard from "./VerseCard";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 function Search() {
   const [searchInput, setSearchInput] = useState("");
-  const [resultVerse, setResultVerse] = useState("");
+  const [esvVerse, setEsvVerse] = useState("");
   const [gptVerse, setGptVerse] = useState("");
   const [translation, setTranslation] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleSearch = async () => {
+    setLoading(true);
+    setLoaded(false);
     const result = await searchVerse(searchInput);
-    setResultVerse(result);
+    setEsvVerse(result);
     console.log(result);
     setLoading(false);
+    setLoaded(true);
   };
 
   const handleTranslationChange = (event) => {
@@ -38,49 +45,70 @@ function Search() {
   };
 
   const handleGpt = async () => {
+    setLoading(true);
+    setLoaded(false);
     const gptResult = await gptRequest(searchInput, translation);
     setGptVerse(gptResult.message.content);
     console.log(gptResult);
     setLoading(false);
+    setLoaded(true);
   };
 
   return (
-    <Layout>
-      <Box
+    <>
+      <Stack
+        direction="row"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "55px",
+          marginTop: "70px",
           paddingBottom: "10px",
         }}
       >
         <TextField
           id="standard-basic"
-          label="Search a verse"
+          label="Enter a verse..."
           variant="standard"
           value={searchInput}
           onChange={(event) => {
             setSearchInput(event.target.value);
           }}
-          sx={{ m: 1, maxWidth: 100 }}
+          sx={{ m: 1, width: "60%" }}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               handleSearch();
             }
           }}
         />
-        <FormControl
-          sx={{ minWidth: 100 }}
+        <LoadingButton
+          loading={loading}
+          onClick={() => {
+            setLoading(true);
+            setEsvVerse("");
+            setGptVerse("");
+            if (translation === "esv") {
+              handleSearch();
+            } else {
+              handleGpt(searchInput, translation);
+            }
+          }}
+          variant="contained"
           size="small"
-          style={{ marginLeft: "6px", marginTop: "18px", height: "2rem" }}
+          style={{
+            height: "40px",
+            width: "100px",
+            marginTop: "10px",
+          }}
         >
-          <InputLabel id="translation-selector-label">Choose</InputLabel>
+          Search
+        </LoadingButton>
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <FormControl id="translation" size="small" sx={{ width: "40%" }}>
+          <InputLabel id="translation-selector-label">Translation</InputLabel>
           <Select
-            sx={{ maxWidth: 80 }}
             labelId="translation-selector-label"
             id="translation-selector"
             value={translation}
-            label="Choose"
+            label="Translation"
             onChange={handleTranslationChange}
           >
             <MenuItem value={"esv"}>ESV</MenuItem>
@@ -114,50 +142,34 @@ function Search() {
             </MenuItem>
           </Select>
         </FormControl>
-        {/*         <Button
-          variant="contained"
-          size="medium"
-          style={{ marginTop: "20px", height: "2rem" }}
-          onClick={handleGpt}
-        >
-          'Mater
-        </Button> */}
-        <LoadingButton
-          loading={loading}
-          onClick={() => {
-            setLoading(true);
-            setResultVerse("");
-            setGptVerse("");
-            if (translation === "esv") {
-              handleSearch();
-            } else {
-              handleGpt(searchInput, translation);
-            }
-          }}
-          variant="contained"
-          size="medium"
-          style={{ marginLeft: "6px", marginTop: "19px", height: "2.3rem" }}
-        >
-          Search
-        </LoadingButton>
-      </Box>
-      <Container fixed>
+      </Stack>
+
+      <Stack spacing={2}>
         <h1
           style={{
             textAlign: "center",
             fontWeight: "bold",
-            marginBottom: "1rem",
+            marginTop: "1rem",
           }}
         >
           Enjoy your translation!
         </h1>
-        <Container fixed>
-          <p>{resultVerse}</p>
-        </Container>
-
-        <p>{gptVerse}</p>
-      </Container>
-    </Layout>
+      </Stack>
+      {!loaded && loading && (
+        <>
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+        </>
+      )}
+      {loaded && (
+        <VerseCard
+          gptVerse={gptVerse}
+          esvVerse={esvVerse}
+          searchInput={searchInput}
+          translation={translation}
+        />
+      )}
+    </>
   );
 }
 
