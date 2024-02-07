@@ -19,8 +19,8 @@ import { LoadingButton } from "@mui/lab";
 import { searchVerse } from "services/api-requests";
 import React, { useState } from "react";
 import { gptRequest } from "services/openai-requests";
-import VerseCard from "./VerseCard";
-import LoadingSkeleton from "./LoadingSkeleton";
+import VerseCard from "../components/VerseCard";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 
 function Search() {
   const [searchInput, setSearchInput] = useState("");
@@ -157,7 +157,6 @@ function Search() {
       </Stack>
       {!loaded && loading && (
         <>
-          <LoadingSkeleton />
           <LoadingSkeleton />
         </>
       )}

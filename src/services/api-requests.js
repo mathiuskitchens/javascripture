@@ -11,6 +11,9 @@ export async function searchVerse(searchedVerse) {
     const response = await axios.get(url, {
       params: {
         q: searchedVerse,
+        "include-passage-references": false,
+        "include-headings": false,
+        "include-footnotes": false,
       },
       headers: {
         Authorization: `Token ${apiKey}`,

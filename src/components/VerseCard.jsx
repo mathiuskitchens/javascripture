@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 
 const VerseCard = ({ gptVerse, esvVerse, searchInput, translation }) => {
-  const [isAi, setIsAi] = useState(false);
-
   const handleCopyToClipboard = () => {
     const textToCopy = gptVerse;
     navigator.clipboard.writeText(textToCopy).catch((error) => {
