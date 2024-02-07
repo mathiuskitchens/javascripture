@@ -35,7 +35,6 @@ export default function FixedBottomNavigation() {
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
-            console.log(event);
           }}
         >
           <BottomNavigationAction

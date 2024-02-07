@@ -1,4 +1,4 @@
-import { Box, Card, Stack } from "@mui/material";
+import { Box, Card, IconButton, Stack } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 
@@ -76,26 +76,51 @@ const sampleData = [
 ];
 
 const TopHits = () => {
+  function handleLike(hit) {
+    console.log("hit", hit);
+    console.log(hit.hits + 1);
+  }
+
+  function handleDislike(hit) {
+    console.log(hit.hits - 1);
+  }
+
   return (
     <>
       <h1 className="mb-14"></h1>
 
-      {sampleData.map((verse) => (
-        <Card key={verse.id} className="mx-2 my-4 p-4 h-auto flex">
+      {sampleData.map((hit) => (
+        <Card
+          key={hit.id}
+          className="mx-2 my-4 p-4 h-auto flex"
+          sx={{ borderRadius: "10px" }}
+        >
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <p>{verse.verse}</p>
-            <h2>{verse.title}</h2>
+            <p>{hit.verse}</p>
+            <h2>{hit.title}</h2>
 
             <p>
-              <i>Spoken by {verse.speaker}</i>
+              <i>Spoken by {hit.speaker}</i>
             </p>
 
+            <p>
+              <strong>Hits:</strong> {hit.hits}
+            </p>
             <Stack direction="row" spacing={3} n className="pt-2">
-              <p>
-                <strong>Hits:</strong> {verse.hits}
-              </p>
-              <ThumbUpOffAltIcon />
-              <ThumbDownOffAltIcon />
+              <IconButton
+                onClick={() => {
+                  handleLike(hit);
+                }}
+              >
+                <ThumbUpOffAltIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  handleDislike(hit);
+                }}
+              >
+                <ThumbDownOffAltIcon />
+              </IconButton>
             </Stack>
           </Box>
         </Card>

@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 
 const VerseCard = ({ gptVerse, esvVerse, searchInput, translation }) => {
+  const [verseToShare, setVerseToShare] = useState("");
+
   const handleCopyToClipboard = () => {
-    const textToCopy = gptVerse;
-    navigator.clipboard.writeText(textToCopy).catch((error) => {
+    navigator.clipboard.writeText(verseToShare).catch((error) => {
       console.error("Error copying to clipboard:", error.message);
     });
   };
@@ -22,7 +23,7 @@ const VerseCard = ({ gptVerse, esvVerse, searchInput, translation }) => {
       if (navigator.share) {
         await navigator.share({
           title: `${searchInput} as read by ${translation}`,
-          text: `${esvVerse}`,
+          text: `${verseToShare}`,
         });
         console.log("Successfully shared");
       } else {
@@ -35,15 +36,36 @@ const VerseCard = ({ gptVerse, esvVerse, searchInput, translation }) => {
   };
 
   return (
-    <Card className="m-2 p-4 bg-slate-800 rounded-lg h-auto">
+    <Card className="m-2 p-4 h-auto">
       <CardContent>
         <Typography variant="body1">{esvVerse}</Typography>
         <Typography variant="body1">{gptVerse}</Typography>
       </CardContent>
-      <CardContent></CardContent>
+
       <CardActions>
-        <Button size="small" color="primary" onClick={handleShare}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            if (esvVerse === "" || esvVerse === undefined) {
+              setVerseToShare(gptVerse);
+            } else {
+              setVerseToShare(esvVerse);
+              console.log(esvVerse);
+            }
+            handleShare();
+          }}
+        >
           Share
+        </Button>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            console.log("Add to Hits");
+          }}
+        >
+          Add to Hits
         </Button>
       </CardActions>
     </Card>
