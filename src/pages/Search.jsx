@@ -5,13 +5,10 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import {
-  Card,
-  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  Skeleton,
   Stack,
   TextField,
 } from "@mui/material";
@@ -136,6 +133,27 @@ function Search() {
             <MenuItem value={"groot"}>
               <img
                 src="https://www.inspireuplift.com/resizer/?image=https://cdn.inspireuplift.com/uploads/images/seller_products/1691205632_Groot-01.png&width=600&height=600&quality=90&format=auto&fit=pad"
+                height="40px"
+                width="40px"
+              />
+            </MenuItem>
+            <MenuItem value={"gandalf"}>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/famous-character-vol-2-colored/48/JD-41-512.png"
+                height="40px"
+                width="40px"
+              />
+            </MenuItem>
+            <MenuItem value={"gollum"}>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/famous-character-vol-2-colored/48/JD-40-512.png"
+                height="40px"
+                width="40px"
+              />
+            </MenuItem>
+            <MenuItem value={"elvish"}>
+              <img
+                src="https://cdn0.iconfinder.com/data/icons/famous-character-vol-2-colored/48/JD-43-512.png"
                 height="40px"
                 width="40px"
               />
