@@ -17,8 +17,8 @@ export async function gptRequest(input, translation) {
         content: `${input}`,
       },
     ],
-    temperature: 0.7,
-    model: "gpt-3.5-turbo",
+    temperature: 0.9,
+    model: "gpt-4o",
   });
 
   console.log(completion.choices[0]);

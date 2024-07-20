@@ -59,11 +59,10 @@
             }
         ],
         "quotes": [
-            "error"
+            "off"
         ],
         "semi": [
-            "error",
-            "always"
+            "off"
         ],
         "no-trailing-spaces": "error",
         "no-unused-vars": [
